@@ -49,7 +49,7 @@ const ProfileModal = ({ user, children }) => {
             <Image
               borderRadius="full"
               boxSize="150px"
-              src={user.pic}
+              src={user.pic.startsWith("http") ? user.pic : `https://chat-app-823h.onrender.com/${user.pic}`} // Check if the URL is absolute or relative
               alt={user.name}
             />
             <Text

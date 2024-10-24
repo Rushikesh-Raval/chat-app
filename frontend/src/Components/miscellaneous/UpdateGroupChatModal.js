@@ -24,7 +24,7 @@ import UserBadgeItem from "../User Avatar/UserBadgeItem";
 import axios from "axios";
 import UserListItem from "../User Avatar/UserListItem";
 
-const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
+const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [groupChatName, setGroupChatName] = useState("");
   const [renameLoading, setRenameLoading] = useState(false);
@@ -49,7 +49,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
         },
       };
       const { data } = await axios.put(
-        "/api/chats/rename",
+        "https://chat-app-823h.onrender.com/api/chats/rename", // Updated URL
         {
           chatId: selectedChat._id,
           chatName: groupChatName,
@@ -82,12 +82,12 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get(`/api/user?search=${query}`, config);
+      const { data } = await axios.get(`https://chat-app-823h.onrender.com/api/user?search=${query}`, config); // Updated URL
       setSearchResult(data);
       setLoading(false);
     } catch (error) {
       toast({
-        title: "Error Occured!!",
+        title: "Error Occurred!!",
         description: "Failed to load search results.",
         status: "error",
         duration: 5000,
@@ -129,7 +129,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
         },
       };
       const { data } = await axios.put(
-        "/api/chats/groupadd",
+        "https://chat-app-823h.onrender.com/api/chats/groupadd", // Updated URL
         { chatId: selectedChat._id, userId: user1._id },
         config
       );
@@ -169,7 +169,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
         },
       };
       const { data } = await axios.put(
-        "/api/chats/groupremove",
+        "https://chat-app-823h.onrender.com/api/chats/groupremove", // Updated URL
         {
           chatId: selectedChat._id,
           userId: user1._id,

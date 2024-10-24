@@ -14,7 +14,9 @@ const app = express();
 connectDB(); // Connect to the database
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "https://chat-app-823h.onrender.com", // Your deployed frontend URL
+}));
 app.use(express.json()); // Parse JSON from requests
 
 // Routes
@@ -38,22 +40,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// const path = require('path');
-
-// // Serve static files from the frontend build folder
-// app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-// });
-
-// const path = require('path');
-// app.use(express.static(path.join(__dirname, 'client/build')));
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-// });
-
 // -------------------Deployment----------------------
 
 // Middleware for handling errors
@@ -70,7 +56,7 @@ const server = app.listen(PORT, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 60000, // Wait 60 seconds after the last message to close the connection
   cors: {
-    origin: "http://localhost:3000", // Your frontend URL
+    origin: "https://chat-app-823h.onrender.com", // Your deployed frontend URL
   },
 });
 
@@ -109,10 +95,6 @@ io.on("connection", (socket) => {
       socket.in(user._id).emit("message received", newMessageReceived);
     });
   });
-
-  // socket.on("disconnect", () => {
-  //   console.log("User disconnected from socket.io");
-  // });
 
   socket.off("setup", () => {
     console.log("USER DISCONNECTED");

@@ -20,7 +20,7 @@ import io from "socket.io-client";
 import Lottie from "react-lottie";
 import animationData from "../animation/typing.json";
 
-const ENDPOINT = "http://localhost:5001";
+const ENDPOINT = "https://chat-app-823h.onrender.com"; // Socket.io server URL
 let socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -54,7 +54,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       };
       setLoading(true);
       const { data } = await axios.get(
-        `/api/message/${selectedChat._id}`,
+        `${ENDPOINT}/api/message/${selectedChat._id}`, // Updated URL
         config
       );
       setMessages(data);
@@ -84,7 +84,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
     // Cleanup the socket connection on component unmount
     return () => {
-      socket.disconnect(); ///////////////////////////////////extra
+      socket.disconnect();
     };
   }, []);
 
@@ -96,7 +96,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   }, [selectedChat]);
 
-  console.log(notification,".......Notification")
+  console.log(notification, ".......Notification");
 
   // Setup socket listener for receiving messages, run once
   useEffect(() => {
@@ -135,7 +135,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
         setNewMessage("");
         const { data } = await axios.post(
-          "/api/message",
+          `${ENDPOINT}/api/message`, // Updated URL
           {
             content: newMessage,
             chatId: selectedChat._id,

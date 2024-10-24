@@ -51,7 +51,6 @@ const SideDrawer = () => {
 
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
-    // SpeechSynthesisUtterance(null)
     navigate("/");
   };
 
@@ -75,16 +74,16 @@ const SideDrawer = () => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
+      const { data } = await axios.get(`https://chat-app-823h.onrender.com/api/user?search=${search}`, config);
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
       toast({
-        title: "Error Occured While Searching",
+        title: "Error Occurred While Searching",
         description: "Failed To Load Search Result",
         status: "error",
         duration: 5000,
-        isCloasable: true,
+        isClosable: true,
         position: "bottom-left",
       });
       setLoading(false);
@@ -100,7 +99,7 @@ const SideDrawer = () => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post("/api/chats", { userId }, config);
+      const { data } = await axios.post("https://chat-app-823h.onrender.com/api/chats", { userId }, config);
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
 
       setSelectedChat(data);

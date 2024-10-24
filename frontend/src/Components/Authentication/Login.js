@@ -29,8 +29,6 @@ const Login = () => {
     console.log(email, "--", password);
     setLoading(true);
     if (!email || !password) {
-      console.log(email, " not email and password ", password);
-
       toast({
         title: "Please Fill All The Fields",
         status: "warning",
@@ -47,14 +45,14 @@ const Login = () => {
           "Content-type": "application/json",
         },
       };
-      console.log(email, password);
+
+      // Change the URL to your deployed backend URL
       const { data } = await axios.post(
-        "http://localhost:5001/api/user/login",
+        "https://chat-app-823h.onrender.com/api/user/login",
         { email, password },
         config
       );
 
-      console.log(JSON.stringify(data));
       toast({
         title: "Login Successful!!",
         status: "success",
@@ -67,7 +65,7 @@ const Login = () => {
       navigate("/chats");
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: "Error Occurred!",
         description: error.response?.data?.message || error.message,
         status: "warning",
         duration: 5000,
