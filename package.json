@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/server.js",
-    "build": "npm install --legaycy-peer-deps && npm install --prefix frontend && npm run build --prefix frontend"
-  },
+  "start": "node server.js",
+  "build": "cd ../frontend && npm install && npm run build"
+},
   "author": "Rushikesh",
   "license": "ISC",
   "dependencies": {

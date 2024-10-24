@@ -25,20 +25,41 @@ app.use("/api/message", messageRoutes);
 // -------------------Deployment----------------------
 
 
-const __dirname1 = path.resolve()
+// const __dirname1 = path.resolve()
 
-if(process.env.NODE_ENV === "production"){
-  app.use(express.static(path.join(__dirname1,"/frontend/build")))
+// if(process.env.NODE_ENV === "production"){
+//   app.use(express.static(path.join(__dirname1,"/frontend/build")))
 
-  app.get('*',(req,res)=>{
-    res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"))
-  })
+//   app.get('*',(req,res)=>{
+//     res.sendFile(path.join(__dirname1,"frontend/build","index.html"))
+//   })
 
-}else{
-  app.get("/",(req,res)=>{
-    res.send("API Is Running Successfully")
-  })
-}
+// }else{
+//   app.get("/",(req,res)=>{
+//     res.send("API Is Running Successfully")
+//   })
+// }
+
+
+const path = require('path');
+
+// Serve static files from the frontend build folder
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+});
+
+
+
+
+
+// const path = require('path');
+// app.use(express.static(path.join(__dirname, 'client/build')));
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+// });
 
 
 
